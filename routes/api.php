@@ -19,3 +19,6 @@ Route::post('/users', [UserController::class, 'create']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::resource('rides', BlogController::class);
+Route::resource('users', BlogController::class);
