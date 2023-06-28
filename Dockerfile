@@ -8,8 +8,7 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 # Instalar as dependências do Laravel usando o Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer install --no-interaction
+RUN composer update
 RUN php artisan migrate
 RUN php artisan serve
 
