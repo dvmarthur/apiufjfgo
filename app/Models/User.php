@@ -23,7 +23,10 @@ class User extends Authenticatable
         'password',
         'user_type_id',
         'matricula',
-        'numero_carteira_motorista'
+        'curso',
+        'phone',
+        'photo',
+        'cnh'
     ];
 
     /**
@@ -44,4 +47,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function caronasRecebidas()
+    {
+        return $this->belongsToMany(Ride::class);
+    }
+
+    public function caronasOfertadas()
+    {
+        return $this->hasMany(Ride::class);
+    }
+
+    public function tipoUsuario(){
+        return $this->belongsTo(UserType::class);
+    }
+
 }

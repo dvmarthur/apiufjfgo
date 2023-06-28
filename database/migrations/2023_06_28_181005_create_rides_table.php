@@ -18,10 +18,10 @@ return new class extends Migration
             $table->integer('vagas')->default(0);
             $table->string('from_adress');
             $table->string('to_adress');
-            $table->unsignedBigInteger('driver_user_id');
-            $table->foreign('driver_user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('driver_id');
             $table->string('status');
             $table->timestamps();
+            $table->foreign('driver_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
