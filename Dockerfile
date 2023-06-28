@@ -1,5 +1,5 @@
 # Usar a imagem base do PHP
-FROM php:8.1-apache
+FROM php:-apache
 
 # Diretório de trabalho dentro do container
 WORKDIR /var/www/html
@@ -7,6 +7,7 @@ WORKDIR /var/www/html
 # Copiar os arquivos da aplicação para o container
 COPY . /var/www/html
 
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 # Instalar as dependências do Laravel usando o Composer
 RUN composer update
 RUN php artisan migrate
