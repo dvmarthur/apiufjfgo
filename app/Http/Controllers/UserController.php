@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
 
 class UserController extends Controller
 {
@@ -19,22 +21,29 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
-        $data = $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'matricula' => 'required',
-            'phone' => 'required|phone|unique:users',
             'cnh' => 'nullable',
             'password' => 'required',
-            'photo' => 'nullable',
+            'photo' => 'required',
             'curso' => 'required',
+            'phone' => 'required',
             'user_type_id' => 'required|exists:user_types,id',
         ]);
-
+    
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+    
+        $data = $validator->validated();
+    
         $user = User::create($data);
-
+    
         return response()->json($user, 201);
     }
+    
 
     /**
      * Store a newly created resource in storage.
