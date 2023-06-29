@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ride;
+use App\Models\UserRide;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
@@ -121,5 +122,15 @@ class RideController extends Controller
             "data" => $ride,
             "message" => "The ride ended successfully"
         ], Response::HTTP_OK);
+    }
+    public function reservar(Request $request)
+    {
+        $ride = new UserRide();
+        $ride->user_id = $request->user_id;
+        $ride->ride_id = $request->ride_id;
+        $ride->save();
+        return response()->json([
+            "message" => "ride reserved."
+        ], 201);
     }
 }
