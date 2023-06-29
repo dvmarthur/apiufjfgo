@@ -33,7 +33,8 @@ class RideController extends Controller
     public function create(Request $request)
     {
         $ride = new Ride;
-        $ride->datetime = $request->datetime;
+        $ride->date = $request->date;
+        $ride->time = $request->time;
         $ride->passengers = 0;
         $ride->vagas = $request->vagas;
         $ride->from = $request->from;
@@ -55,7 +56,8 @@ class RideController extends Controller
     public function store(Request $request)
     {   
         $request->validate([
-            'datetime' => 'required',
+            'date' => 'required',
+            'time' => 'required',
             'vagas' => 'required',
             'from' => 'required',
             'destiny' => 'required',
@@ -92,7 +94,8 @@ class RideController extends Controller
     public function update(Request $request, Ride $ride)
     {
         $request->validate([
-            'datetime' => 'required',
+            'date' => 'required',
+            'time' => 'required',
             'vagas' => 'required',
             'status' => 'required',
         ]);

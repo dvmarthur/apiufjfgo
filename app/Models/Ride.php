@@ -9,7 +9,8 @@ class Ride extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'datetime',
+        'date',
+        'time',
         'passengers',
         'vagas',
         'from',

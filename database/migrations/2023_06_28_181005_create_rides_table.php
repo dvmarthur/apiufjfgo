@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('rides', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('datetime');
+            $table->date('date');
+            $table->time('time');
             $table->integer('passengers')->default(0);
             $table->integer('vagas')->default(0);
             $table->string('from');
