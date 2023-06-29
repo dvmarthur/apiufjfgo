@@ -35,8 +35,8 @@ class RideController extends Controller
         $ride->datetime = $request->datetime;
         $ride->passengers = 0;
         $ride->vagas = $request->vagas;
-        $ride->from_adress = $request->rua . ', ' . $request->numero . ', ' . $request->bairro . ', ' . $request->cidade;
-        $ride->to_adress = $request->rua . ', ' . $request->numero . ', ' . $request->bairro . ', ' . $request->cidade;
+        $ride->from_adress = $request->from_addres;
+        $ride->to_adress =  $request->to_addres;
         $ride->driver_user_id = Auth::id();
         $ride->status = 'disponível';
         $ride->save();
