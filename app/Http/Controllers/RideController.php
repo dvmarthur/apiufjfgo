@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ride;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 
 class RideController extends Controller
 {
@@ -17,10 +18,10 @@ class RideController extends Controller
     public function index()
     {
         $rides = Ride::latest()->paginate(10);
-        return [
+        return response()->json([
             "status" => 1,
-            "data" => $rides,
-        ];
+            "data" => $rides
+        ], Response::HTTP_OK);
     }
  
     /**
@@ -34,7 +35,7 @@ class RideController extends Controller
         $ride->datetime = $request->datetime;
         $ride->passengers = 0;
         $ride->vagas = $request->vagas;
-        $ride->from_adress = $request->rua . ', ' . $request->numero . ', ' . $request->bairro . ', ' . $request->cidade;
+        $ride->from_adress = $request->rua_origem . ', ' . $request->numero_origem . ', ' . $request->bairro_origem . ', ' . $request->cidade_origem;
         $ride->to_adress = $request->rua . ', ' . $request->numero . ', ' . $request->bairro . ', ' . $request->cidade;
         $ride->driver_user_id = Auth::id();
         $ride->status = 'disponível';
@@ -76,10 +77,10 @@ class RideController extends Controller
      */
     public function show(Ride $ride)
     {
-        return [
+        return response()->json([
             "status" => 1,
-            "data" =>$ride
-        ];
+            "data" => $ride
+        ], Response::HTTP_OK);
     }
  
     /**
@@ -94,20 +95,16 @@ class RideController extends Controller
         $request->validate([
             'datetime' => 'required',
             'vagas' => 'required',
-            'rua' => 'required',
-            'numero' => 'required',
-            'bairro' => 'required',
-            'cidade' => 'required',
             'status' => 'required',
         ]);
  
         $ride->update($request->all());
- 
-        return [
+
+        return response()->json([
             "status" => 1,
             "data" => $ride,
             "message" => "The ride was updated successfully"
-        ];
+        ], Response::HTTP_OK);
     }
  
     /**
@@ -119,10 +116,10 @@ class RideController extends Controller
     public function destroy(Ride $ride)
     {
         $ride->delete();
-        return [
+        return response()->json([
             "status" => 1,
             "data" => $ride,
             "message" => "The ride ended successfully"
-        ];
+        ], Response::HTTP_OK);
     }
 }
