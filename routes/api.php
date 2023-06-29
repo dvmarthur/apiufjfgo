@@ -16,22 +16,33 @@ use App\Http\Controllers\UserController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::post('/users', [UserController::class, 'create']);
-Route::get('/getusers', [UserController::class, 'index']);
-
-
-Route::post('/ridecreate', [RideController::class, 'create']);
-Route::get('/getriders', [RideController::class, 'index']);
-
-Route::post('/ridereservar', [RideController::class, 'reservar']);
-
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::resource('rides', RideController::class);
-//Route::resource('users', UserController::class);
+Route::resource('rides', RideController::class)->except([
+    'index', 'create', 'store', 'show', 'update', 'destroy'
+]);
+Route::get('rides', [RideController::class, 'index'])->name('rides.index');
+Route::post('rides', [RideController::class, 'store'])->name('rides.store');
+Route::get('rides/create', [RideController::class, 'create'])->name('rides.create');
+Route::get('rides/{ride}', [RideController::class, 'show'])->name('rides.show');
+Route::put('rides/{ride}', [RideController::class, 'update'])->name('rides.update');
+Route::delete('rides/{ride}', [RideController::class, 'destroy'])->name('rides.destroy');
+Route::post('/rides/reservar', [RideController::class, 'reservar'])->name('reservar');
 
-Route::get('/messages', [MessageController::class, 'index']);
-Route::post('/messages', [MessageController::class, 'store']);
+
+Route::resource('users', UserController::class)->except([
+    'index', 'create', 'store', 'show', 'update', 'destroy'
+]);
+Route::get('users', [RideController::class, 'index'])->name('users.index');
+Route::post('users', [RideController::class, 'store'])->name('users.store');
+Route::get('users/create', [RideController::class, 'create'])->name('users.create');
+Route::get('users/{ride}', [RideController::class, 'show'])->name('users.show');
+Route::get('users/{ride}/edit', [RideController::class, 'edit'])->name('users.edit');
+Route::put('users/{ride}', [RideController::class, 'update'])->name('users.update');
+Route::delete('users/{ride}', [RideController::class, 'destroy'])->name('users.destroy');
+
+Route::get('/messages/{senderId}/{receiverId}', [MessageController::class, 'getMessages']);
+Route::post('/messages', [MessageController::class, 'sendMessage']);
