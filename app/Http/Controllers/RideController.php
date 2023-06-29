@@ -65,7 +65,6 @@ class RideController extends Controller
  
         $ride = Ride::create($request->all());
         return [
-            "status" => 1,
             "data" => $ride
         ];
     }
@@ -79,11 +78,17 @@ class RideController extends Controller
     public function show(Ride $ride)
     {
         return response()->json([
-            "status" => 1,
             "data" => $ride
         ], Response::HTTP_OK);
     }
- 
+
+    public function edit(Ride $ride)
+    {
+        return response()->json([
+            "data" => $ride
+        ], Response::HTTP_OK);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -103,7 +108,6 @@ class RideController extends Controller
         $ride->update($request->all());
 
         return response()->json([
-            "status" => 1,
             "data" => $ride,
             "message" => "The ride was updated successfully"
         ], Response::HTTP_OK);
@@ -119,7 +123,6 @@ class RideController extends Controller
     {
         $ride->delete();
         return response()->json([
-            "status" => 1,
             "data" => $ride,
             "message" => "The ride ended successfully"
         ], Response::HTTP_OK);
