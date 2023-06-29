@@ -20,7 +20,6 @@ class RideController extends Controller
     {
         $rides = Ride::latest()->paginate(10);
         return response()->json([
-            "status" => 1,
             "data" => $rides
         ], Response::HTTP_OK);
     }
@@ -39,6 +38,7 @@ class RideController extends Controller
         $ride->vagas = $request->vagas;
         $ride->from = $request->from;
         $ride->destiny = $request->destiny;
+        $ride->justWomen = $request->justWomen;
         $ride->driver_user_id = Auth::id();
         $ride->status = 'disponível';
         $ride->save();

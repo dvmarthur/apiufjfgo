@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('destiny');
             $table->unsignedBigInteger('driver_id');
             $table->string('status');
+            $table->boolean('justWomen');
             $table->timestamps();
             $table->foreign('driver_id')->references('id')->on('users')->onDelete('cascade');
         });

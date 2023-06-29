@@ -16,7 +16,8 @@ class Ride extends Model
         'from',
         'destiny',
         'status',
-        'driver_id'
+        'driver_id',
+        'justWomen'
     ];
 
     /**
