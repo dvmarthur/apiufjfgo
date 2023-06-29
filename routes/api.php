@@ -36,13 +36,13 @@ Route::post('/rides/reservar', [RideController::class, 'reservar'])->name('reser
 Route::resource('users', UserController::class)->except([
     'index', 'create', 'store', 'show', 'update', 'destroy'
 ]);
-Route::get('users', [RideController::class, 'index'])->name('users.index');
-Route::post('users', [RideController::class, 'store'])->name('users.store');
-Route::get('users/create', [RideController::class, 'create'])->name('users.create');
-Route::get('users/{ride}', [RideController::class, 'show'])->name('users.show');
-Route::get('users/{ride}/edit', [RideController::class, 'edit'])->name('users.edit');
-Route::put('users/{ride}', [RideController::class, 'update'])->name('users.update');
-Route::delete('users/{ride}', [RideController::class, 'destroy'])->name('users.destroy');
+Route::get('users', [UserController::class, 'index'])->name('users.index');
+Route::post('users', [UserController::class, 'store'])->name('users.store');
+Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+Route::get('users/{ride}', [UserController::class, 'show'])->name('users.show');
+Route::get('users/{ride}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::put('users/{ride}', [UserController::class, 'update'])->name('users.update');
+Route::delete('users/{ride}', [UserController::class, 'destroy'])->name('users.destroy');
 
 Route::get('/messages/{senderId}/{receiverId}', [MessageController::class, 'getMessages']);
 Route::post('/messages/{senderId}/{receiverId}', [MessageController::class, 'sendMessage']);
