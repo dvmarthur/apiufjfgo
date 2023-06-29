@@ -12,8 +12,8 @@ class Ride extends Model
         'datetime',
         'passengers',
         'vagas',
-        'from_adress',
-        'to_adress',
+        'from',
+        'destiny',
         'status',
         'driver_id'
     ];

@@ -36,8 +36,8 @@ class RideController extends Controller
         $ride->datetime = $request->datetime;
         $ride->passengers = 0;
         $ride->vagas = $request->vagas;
-        $ride->from_adress = $request->rua_origem . ', ' . $request->numero_origem . ', ' . $request->bairro_origem . ', ' . $request->cidade_origem;
-        $ride->to_adress = $request->rua . ', ' . $request->numero . ', ' . $request->bairro . ', ' . $request->cidade;
+        $ride->from = $request->from;
+        $ride->destiny = $request->destiny;
         $ride->driver_user_id = Auth::id();
         $ride->status = 'disponível';
         $ride->save();
@@ -57,10 +57,8 @@ class RideController extends Controller
         $request->validate([
             'datetime' => 'required',
             'vagas' => 'required',
-            'rua' => 'required',
-            'numero' => 'required',
-            'bairro' => 'required',
-            'cidade' => 'required',
+            'from' => 'required',
+            'destiny' => 'required',
         ]);
  
         $ride = Ride::create($request->all());
