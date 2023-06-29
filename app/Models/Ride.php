@@ -15,6 +15,7 @@ class Ride extends Model
         'from_adress',
         'to_adress',
         'status',
+        'driver_id'
     ];
 
     /**
