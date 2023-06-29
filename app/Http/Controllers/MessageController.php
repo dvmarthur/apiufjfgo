@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -23,11 +24,24 @@ class MessageController extends Controller
     public function sendMessage(Request $request)
     {
         $message = new Message();
-        $message->sender_id = $request->input('sender_id');
-        $message->receiver_id = $request->input('receiver_id');
+        $message->sender_id = Auth::id();
+        $message->receiver_id = $request->route('receiverId');
         $message->content = $request->input('content');
         $message->save();
 
         return response()->json($message, 201);
     }
+
+    public function getConversations()
+{
+    $userId = Auth::id();
+
+    $conversations = Message::where('sender_id', $userId)
+        ->orWhere('receiver_id', $userId)
+        ->groupBy('sender_id', 'receiver_id')
+        ->get();
+
+    return response()->json($conversations);
+}
+
 }

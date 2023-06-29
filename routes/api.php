@@ -45,4 +45,5 @@ Route::put('users/{ride}', [RideController::class, 'update'])->name('users.updat
 Route::delete('users/{ride}', [RideController::class, 'destroy'])->name('users.destroy');
 
 Route::get('/messages/{senderId}/{receiverId}', [MessageController::class, 'getMessages']);
-Route::post('/messages', [MessageController::class, 'sendMessage']);
+Route::post('/messages/{senderId}/{receiverId}', [MessageController::class, 'sendMessage']);
+Route::get('/conversations', [MessageController::class, 'getConversations'])->name('conversations.index');
