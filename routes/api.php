@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\RideController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -16,6 +17,13 @@ use App\Http\Controllers\UserController;
 |
 */
 Route::post('/users', [UserController::class, 'create']);
+Route::get('/getusers', [UserController::class, 'index']);
+
+
+Route::post('/ridecreate', [RideController::class, 'create']);
+Route::get('/getriders', [RideController::class, 'index']);
+
+Route::post('/ridereservar', [RideController::class, 'reservar']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
