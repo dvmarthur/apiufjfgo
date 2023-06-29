@@ -61,6 +61,7 @@ class RideController extends Controller
             'vagas' => 'required',
             'from' => 'required',
             'destiny' => 'required',
+            'justWomen' => 'required'
         ]);
  
         $ride = Ride::create($request->all());
@@ -82,13 +83,6 @@ class RideController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function edit(Ride $ride)
-    {
-        return response()->json([
-            "data" => $ride
-        ], Response::HTTP_OK);
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -103,6 +97,7 @@ class RideController extends Controller
             'time' => 'required',
             'vagas' => 'required',
             'status' => 'required',
+            'justWomen' => 'required',
         ]);
  
         $ride->update($request->all());

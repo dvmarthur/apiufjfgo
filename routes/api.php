@@ -24,27 +24,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('rides', RideController::class)->except([
     'index', 'create', 'store', 'show', 'update', 'destroy'
 ]);
-Route::get('rides', [RideController::class, 'index'])->name('rides.index');
-Route::post('rides', [RideController::class, 'store'])->name('rides.store');
-Route::get('rides/create', [RideController::class, 'create'])->name('rides.create');
-Route::get('rides/{ride}', [RideController::class, 'show'])->name('rides.show');
-Route::put('rides/{ride}', [RideController::class, 'update'])->name('rides.update');
-Route::delete('rides/{ride}', [RideController::class, 'destroy'])->name('rides.destroy');
-Route::post('/rides/reservar', [RideController::class, 'reservar'])->name('reservar');
+Route::get('rides', [RideController::class, 'index']);
+Route::post('rides', [RideController::class, 'store']);
+Route::get('rides/create', [RideController::class, 'create']);
+Route::get('rides/{ride}', [RideController::class, 'show']);
+Route::put('rides/{ride}', [RideController::class, 'update']);
+Route::delete('rides/{ride}', [RideController::class, 'destroy']);
+Route::post('/rides/reservar', [RideController::class, 'reservar']);
 
 
 Route::resource('users', UserController::class)->except([
     'index', 'create', 'store', 'show', 'update', 'destroy'
 ]);
-Route::get('users', [UserController::class, 'index'])->name('users.index');
-Route::post('users', [UserController::class, 'store'])->name('users.store');
-Route::get('users/create', [UserController::class, 'create'])->name('users.create');
-Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
-Route::get('users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
-Route::get('users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
-Route::put('users/{id}', [UserController::class, 'update'])->name('users.update');
-Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+Route::get('users', [UserController::class, 'index']);
+Route::post('users', [UserController::class, 'store']);
+Route::get('users/create', [UserController::class, 'create']);
+Route::get('users/{id}', [UserController::class, 'show']);
+Route::put('users/{id}', [UserController::class, 'edit']);
+Route::delete('users/{id}', [UserController::class, 'destroy']);
 
 Route::get('/messages/{senderId}/{receiverId}', [MessageController::class, 'getMessages']);
 Route::post('/messages/{senderId}/{receiverId}', [MessageController::class, 'sendMessage']);
-Route::get('/conversations', [MessageController::class, 'getConversations'])->name('conversations.index');
+Route::get('/conversations', [MessageController::class, 'getConversations']);
