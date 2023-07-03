@@ -19,5 +19,5 @@ class UserRide extends Model
      * @var array<int, string>
      */
 
-   
+
 }

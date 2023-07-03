@@ -32,18 +32,18 @@ class UserController extends Controller
             'phone' => 'required',
             'user_type_id' => 'required|exists:user_types,id',
         ]);
-    
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 400);
         }
-    
+
         $data = $validator->validated();
-    
+
         $user = User::create($data);
-    
+
         return response()->json($user, 201);
     }
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -51,32 +51,12 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'matricula' => 'required',
-            'phone' => 'required|phone|unique:users',
-            'cnh' => 'nullable',
-            'password' => 'required',
-            'photo' => 'nullable',
-            'curso' => 'required',
-            'user_type_id' => 'required|exists:user_types,id',
-        ]);
- 
-        $user = User::create($request->all());
-        return [
-            "status" => 1,
-            "data" => $user
-        ];
-    }
- 
+
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\User  $user
-     * @return 
+     * @return
      */
     public function show(User $user)
     {
@@ -85,7 +65,7 @@ class UserController extends Controller
             "data" =>$user
         ];
     }
- 
+
     /**
      * Update the specified resource in storage.
      *
@@ -106,16 +86,16 @@ class UserController extends Controller
             'curso' => 'required',
             'user_type_id' => 'required|exists:user_types,id',
         ]);
- 
+
         $user->update($request->all());
- 
+
         return [
             "status" => 1,
             "data" => $user,
             "message" => "Your data was updated successfully"
         ];
     }
- 
+
     /**
      * Remove the specified resource from storage.
      *

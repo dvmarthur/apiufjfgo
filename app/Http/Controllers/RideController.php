@@ -23,7 +23,7 @@ class RideController extends Controller
             "data" => $rides
         ], Response::HTTP_OK);
     }
- 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -39,42 +39,17 @@ class RideController extends Controller
         $ride->from = $request->from;
         $ride->destiny = $request->destiny;
         $ride->justWomen = $request->justWomen;
-        $ride->driver_user_id = Auth::id();
+        $ride->driver_id = Auth::id();
         $ride->status = 'disponível';
         $ride->save();
-        return response()->json([
-            "message" => "ride created, and now avaluable for the passengers"
-        ], 201);
+        return response()->json($ride, 201);
     }
- 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return
-     */
-    public function store(Request $request)
-    {   
-        $request->validate([
-            'date' => 'required',
-            'time' => 'required',
-            'vagas' => 'required',
-            'from' => 'required',
-            'destiny' => 'required',
-            'justWomen' => 'required'
-        ]);
- 
-        $ride = Ride::create($request->all());
-        return [
-            "data" => $ride
-        ];
-    }
- 
+
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Ride  $ride
-     * @return 
+     * @return
      */
     public function show(Ride $ride)
     {
@@ -99,7 +74,7 @@ class RideController extends Controller
             'status' => 'required',
             'justWomen' => 'required',
         ]);
- 
+
         $ride->update($request->all());
 
         return response()->json([
@@ -107,7 +82,7 @@ class RideController extends Controller
             "message" => "The ride was updated successfully"
         ], Response::HTTP_OK);
     }
- 
+
     /**
      * Remove the specified resource from storage.
      *

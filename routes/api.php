@@ -26,7 +26,7 @@ Route::resource('rides', RideController::class)->except([
 ]);
 Route::get('rides', [RideController::class, 'index']);
 Route::post('rides', [RideController::class, 'store']);
-Route::get('rides/create', [RideController::class, 'create']);
+Route::post('rides/create', [RideController::class, 'create']);
 Route::get('rides/{ride}', [RideController::class, 'show']);
 Route::put('rides/{ride}', [RideController::class, 'update']);
 Route::delete('rides/{ride}', [RideController::class, 'destroy']);
@@ -38,7 +38,7 @@ Route::resource('users', UserController::class)->except([
 ]);
 Route::get('users', [UserController::class, 'index']);
 Route::post('users', [UserController::class, 'store']);
-Route::get('users/create', [UserController::class, 'create']);
+Route::post('users/create', [UserController::class, 'create']);
 Route::get('users/{id}', [UserController::class, 'show']);
 Route::put('users/{id}', [UserController::class, 'edit']);
 Route::delete('users/{id}', [UserController::class, 'destroy']);
