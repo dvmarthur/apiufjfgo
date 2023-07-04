@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/login', [UserController::class, 'login']);
+
 Route::resource('rides', RideController::class)->except([
     'index', 'create', 'store', 'show', 'update', 'destroy'
 ]);
