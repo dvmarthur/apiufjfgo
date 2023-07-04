@@ -31,7 +31,7 @@ class RideController extends Controller
      */
     public function create(Request $request)
     {
-        $ride = new Ride;
+        $ride = new Ride();
         $ride->date = $request->date;
         $ride->time = $request->time;
         $ride->passengers = 0;
