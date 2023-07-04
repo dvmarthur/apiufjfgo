@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ride;
 use App\Models\UserRide;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 
@@ -30,7 +31,21 @@ class RideController extends Controller
      * @return
      */
     public function create(Request $request)
-    {   $ride = Ride::create([
+    {
+        $validator = Validator::make($request->all(), [
+            'date' => 'required',
+            'time' => 'required',
+            'vagas' => 'required|integer',
+            'from' => 'required',
+            'destiny' => 'required',
+            'justWomen' => 'required|boolean',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
+
+        $ride = new Ride([
             'date' => $request->date,
             'time' => $request->time,
             'passengers' => 0,
@@ -41,9 +56,12 @@ class RideController extends Controller
             'driver_id' => Auth::id(),
             'status' => 'disponível',
         ]);
-    
+
+        $ride->save();
+
         return response()->json($ride, 201);
     }
+
 
     /**
      * Display the specified resource.
