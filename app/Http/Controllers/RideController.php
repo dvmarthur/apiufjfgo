@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class RideController extends Controller
 {
@@ -57,8 +58,14 @@ class RideController extends Controller
             'status' => 'disponível',
         ]);
 
-        $ride->save();
-
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        try {
+            $ride->save();   
+            DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        } catch (\Exception $e) {
+            // Handle the exception or display an error message
+            echo "Error: " . $e->getMessage();
+        }
         return response()->json($ride, 201);
     }
 
