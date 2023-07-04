@@ -63,8 +63,7 @@ class RideController extends Controller
             $ride->save();   
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
         } catch (\Exception $e) {
-            // Handle the exception or display an error message
-            echo "Error: " . $e->getMessage();
+            echo "Error: Could not add this record on the database" . $e->getMessage();
         }
         return response()->json($ride, 201);
     }
