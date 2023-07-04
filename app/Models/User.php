@@ -23,9 +23,9 @@ class User extends Authenticatable
         'password',
         'user_type_id',
         'matricula',
-        'curso',
+        'idade',
         'phone',
-        'photo',
+        'genero',
         'cnh'
     ];
 

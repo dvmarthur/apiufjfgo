@@ -27,8 +27,8 @@ class UserController extends Controller
             'matricula' => 'required',
             'cnh' => 'nullable',
             'password' => 'required',
-            'photo' => 'required',
-            'curso' => 'required',
+            'genero' => 'required',
+            'idade' => 'required',
             'phone' => 'required',
             'user_type_id' => 'required|exists:user_types,id',
         ]);
@@ -82,8 +82,8 @@ class UserController extends Controller
             'phone' => 'required|phone|unique:users',
             'cnh' => 'nullable',
             'password' => 'required',
-            'photo' => 'nullable',
-            'curso' => 'required',
+            'genero' => 'required',
+            'idade' => 'required',
             'user_type_id' => 'required|exists:user_types,id',
         ]);
 

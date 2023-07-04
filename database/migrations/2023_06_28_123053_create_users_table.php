@@ -11,12 +11,12 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('curso');
             $table->string('matricula')->unique();
             $table->string('cnh')->nullable(); // Adiciona campo 'cnh' que pode ser nulo
             $table->string('password');
             $table->string('phone')->unique();
-            $table->string('photo')->nullable();
+            $table->string('genero')->default('não informado');
+            $table->integer('idade');
             $table->unsignedBigInteger('user_type_id'); // Chave estrangeira
             $table->timestamps();
             // Relacionamento com a tabela 'user_types'
