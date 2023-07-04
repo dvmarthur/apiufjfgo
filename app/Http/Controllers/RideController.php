@@ -30,18 +30,18 @@ class RideController extends Controller
      * @return
      */
     public function create(Request $request)
-    {
-        $ride = new Ride();
-        $ride->date = $request->date;
-        $ride->time = $request->time;
-        $ride->passengers = 0;
-        $ride->vagas = $request->vagas;
-        $ride->from = $request->from;
-        $ride->destiny = $request->destiny;
-        $ride->justWomen = $request->justWomen;
-        $ride->driver_id = Auth::id();
-        $ride->status = 'disponível';
-        $ride->save();
+    {   $ride = Ride::create([
+            'date' => $request->date,
+            'time' => $request->time,
+            'passengers' => 0,
+            'vagas' => $request->vagas,
+            'from' => $request->from,
+            'destiny' => $request->destiny,
+            'justWomen' => $request->justWomen,
+            'driver_id' => Auth::id(),
+            'status' => 'disponível',
+        ]);
+    
         return response()->json($ride, 201);
     }
 
